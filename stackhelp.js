@@ -46,7 +46,7 @@ module.exports = () => {
 
     if(!isActive) return void 0
 
-    const errQuery = (err.toString() + extraTags.join()).replace(/ /gi, '+')
+    const errQuery = (err.toString() + tags.join()).replace(/ /gi, '+'),
           query = osCommand[process.platform] + url + errQuery
 
     exec(query, (err) => {
