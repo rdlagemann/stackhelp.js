@@ -1,0 +1,28 @@
+{
+  "name": "stackhelp",
+  "version": "1.0.0",
+  "description": "Pass an error to stackhelp and it will search on StackOverflow for you.",
+  "main": "sample.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rdlagemann/stackhelp.js.git"
+  },
+  "keywords": [
+    "[\"stack",
+    "overflow\"",
+    "\"help\"",
+    "\"error\"]"
+  ],
+  "author": "Rafael Lagemann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rdlagemann/stackhelp.js/issues"
+  },
+  "homepage": "https://github.com/rdlagemann/stackhelp.js#readme",
+  "devDependencies": {
+    "jest": "^22.1.4"
+  }
+}

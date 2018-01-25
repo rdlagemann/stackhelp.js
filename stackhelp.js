@@ -1,6 +1,5 @@
 const { exec } = require('child_process')
-
-const url = 'http://www.stackoverflow.com/search?q='
+const { queryFormatter } = require('./helper.js')
 
 // maping OS and respective commands to open default browser
 const osCommand = {
@@ -16,41 +15,53 @@ const osCommand = {
 })()
 
 module.exports = () => {
+  const url = 'http://www.stackoverflow.com/search?q='
   let isActive = true
   let tags = []
   
   function on() { isActive = true }
   function off() { isActive = false }
   function toggle() { isActive = isActive ? false : true}
+  function getStatus() { return isActive ? 'on' : 'off' }
   function setTags() { 
-    [].forEach.call(arguments, e => {
-      if(typeof e !== 'string'){
-        throw new TypeError('Tags must be strings')
-      }
-    })
-    tags.push(...arguments) 
-    tags = tags.map(e => '[' + e + ']')
+    if(arguments.length === 0) {
+      tags = []
+    } else {
+      [].forEach.call(arguments, e => {
+        if(typeof e !== 'string'){
+          throw new TypeError('Tags must be strings')
+        }
+      })
+      tags.push(...arguments) 
+      tags = tags.map(e => '[' + e + ']')
+    }
     
+    return tags
+    
+  }
+
+  const controller = {
+    url,
+    on,
+    off,
+    toggle,
+    getStatus,
+    setTags
   }
   
   return function(err) {
     if(!err) {      
-      return {
-        on,
-        off,
-        toggle,
-        setTags
-      }
-
+      return controller
     }
-
-    if(!isActive) return void 0
-
-    const errQuery = (err.toString() + tags.join()).replace(/ /gi, '+'),
-          query = osCommand[process.platform] + url + errQuery
-
-    exec(query, (err) => {
+    
+    if(!isActive) return '[LOG]: stackhelp is off'
+    
+    const query = queryFormatter(url, err.toString() + tags.join())
+  
+    exec(osCommand[process.platform] + query, (err) => {
       if(err) return console.log(err)
     })
+
+    return query
   }
 }

@@ -1,5 +1,13 @@
 const stackhelp = require('./stackhelp')()
 
-stackhelp().setTags('nodejs', 'javascript')
+function promiseFail() {
+  return new Promise( (resolve, reject) => {
+    setTimeout(() => {
+      reject('Promise will always fail')
+      
+    }, 500)
+  })
+}
 
-stackhelp(new Error('Variable not found'))
+// will look for 'err' on Stack Overflow
+promiseFail().catch(err => stackhelp(err))
