@@ -1,6 +1,6 @@
 {
   "name": "stackhelp",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Pass an error to stackhelp and it will search on StackOverflow for you.",
   "main": "./src/stackhelp.js",
   "scripts": {
