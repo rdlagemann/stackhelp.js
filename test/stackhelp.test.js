@@ -39,7 +39,7 @@ describe('Controller test', () => {
   
 })
 
-describe('Mains tasks' , () => {
+describe('Running commands with queries' , () => {
   let searchString
   test('Query validation', () => {
     stackhelp().on()
