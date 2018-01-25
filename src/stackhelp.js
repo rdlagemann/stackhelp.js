@@ -56,7 +56,7 @@ module.exports = () => {
     
     if(!isActive) return '[LOG]: stackhelp is off'
     
-    const query = queryFormatter(url, err.toString() + tags.join())
+    const query = queryFormatter(url, err.toString() + ' ' + tags.join(' '))
   
     exec(osCommand[process.platform] + query, (err) => {
       if(err) return console.log(err)

@@ -1,8 +1,8 @@
-const stackhelp = require('./stackhelp.js')()
-const { queryFormatter } = require('./helper.js')
+const stackhelp = require('./../src/stackhelp.js')()
+const { queryFormatter } = require('./../src/helper.js')
 
 const url = 'http://www.stackoverflow.com/search?q='
-const testErr = new Error('Test Error')
+const testErr = new TypeError('null has no properties')
 
 describe('Controller test', () => {  
 
@@ -49,7 +49,7 @@ describe('Mains tasks' , () => {
 
   test('Query validation with tags', () => {   
     stackhelp().on() 
-    searchString = testErr.toString() + stackhelp().setTags('NodeJS', 'npm').join()
+    searchString = testErr.toString() + ' ' + stackhelp().setTags('NodeJS', 'npm').join(' ')
     expect(stackhelp(testErr)).toBe(queryFormatter(url, searchString))    
   })
 })

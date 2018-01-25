@@ -1,4 +1,4 @@
-const stackhelp = require('./stackhelp')()
+const stackhelp = require('./src/stackhelp')()
 
 function promiseFail() {
   return new Promise( (resolve, reject) => {
