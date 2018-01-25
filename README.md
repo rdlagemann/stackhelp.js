@@ -1,5 +1,5 @@
 # stackhelp.js
-Hardcore StackOverflow debuging. :see_no_evil:
+Hardcore StackOverflow debugging. :see_no_evil:
 
 ## What
 stackhelp will throw your Error right on Stack Overflow using your default browser.
