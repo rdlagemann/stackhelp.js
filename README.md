@@ -46,5 +46,6 @@ stackhelp.setTags([
 // this is it
 ```
 ## Test
-Run `npm install --only=dev`
+Run `npm install --only=dev`  
+
 Then `npm test`
