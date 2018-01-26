@@ -8,6 +8,10 @@ const osCommand = {
   'darwin': 'open '
 }
 
+const url = 'http://www.stackoverflow.com/search?q='
+let isActive = true
+let tags = []
+
 // test OS when required
 ;(function() {
   if(! (process.platform in osCommand)) {
@@ -15,47 +19,45 @@ const osCommand = {
   }
 })()
 
-module.exports = () => {
-  const url = 'http://www.stackoverflow.com/search?q='
-  let isActive = true
-  let tags = []
-  
-  // controls stackhelp internal states and display some properties
-  const controller = {
-    on: function on() { isActive = true },
-    off: function off() { isActive = false },
-    toggle: function toggle() { isActive = isActive ? false : true},
-    getStatus: function getStatus() { return isActive ? 'on' : 'off' },
-    setTags: function setTags() { 
-      if(arguments.length === 0) {
-        tags = []
-      } else {
-        [].forEach.call(arguments, e => {
-          if(typeof e !== 'string'){
-            throw new TypeError('Tags must be strings')
-          }
-        })
-        tags.push(...arguments) 
-        tags = tags.map(e => '[' + e + ']')
-      }      
-      return tags      
-    }
-  }
-
-  return function(err) {
-    if(!err) {      
-      return controller
-    }
-    
-    if(!isActive) return '[LOG]: stackhelp is off'
-    
-    const query = queryFormatter(url, err.toString() + ' ' + tags.join(' '))
-    
-    // runs command to open stack overflow on default browser
-    exec(osCommand[process.platform] + query, (err) => {
-      if(err) return console.log(err)
+const on = () => isActive = true 
+const off = () => isActive = false 
+const toggle = () => isActive = isActive ? false : true
+const getStatus = () => isActive ? 'on' : 'off' 
+const setTags = (arr) => { 
+  if(!arr || arr.length === 0) {
+    tags = []
+  } else {
+    [].forEach.call(arr, e => {
+      if(typeof e !== 'string'){
+        throw new TypeError('Tags must be strings')
+      }
     })
+    tags.push(...arr) 
+    tags = tags.map(e => '[' + e + ']')
+  }  
 
-    return query
-  }
+  return tags      
+}
+
+const find = (err) => {
+  if(!isActive) return '[LOG]: stackhelp is off'
+  
+  const query = queryFormatter(url, err.toString() + ' ' + tags.join(' '))
+  
+  // runs command to open stack overflow on default browser
+  exec(osCommand[process.platform] + query, (err) => {
+    if(err) return console.log(err)
+  })
+
+  return query
+}
+
+
+module.exports = {
+  on,
+  off,
+  toggle,
+  getStatus,
+  setTags,
+  find
 }

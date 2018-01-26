@@ -1,4 +1,6 @@
-const stackhelp = require('./src/stackhelp')()
+const stackhelp = require('./src/stackhelp')
+
+console.log(stackhelp)
 
 function promiseFail() {
   return new Promise( (resolve, reject) => {
@@ -10,4 +12,4 @@ function promiseFail() {
 }
 
 // will look for 'err' on Stack Overflow
-promiseFail().catch(err => stackhelp(err))
+promiseFail().catch(err => stackhelp.find(err))
