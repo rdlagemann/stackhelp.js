@@ -11,7 +11,7 @@ First, you should
   
 example:
 ```javascript
-const stackhelp = require('stackhelp')() // important
+const stackhelp = require('stackhelp')
 
 function promiseFail() {
   return new Promise( (resolve, reject) => {
@@ -22,25 +22,30 @@ function promiseFail() {
   })
 }
 
-// will look for 'err' on Stack Overflow
-promiseFail().catch(err => stackhelp(err))
+// 'find' function will look for 'err' on Stack Overflow
+promiseFail().catch(err => stackhelp.find(err))
 ```
 Automatic opens your default browser with the proper stackoverflow search, can become really annoying.
 
 ## Are you here yet?
 
 ```javascript
-stackhelp() // whit no arguments you can access some properties
+stackhelp.off() // turns off stackhelp
 
-stackhelp().off() // turns off stackhelp
+stackhelp.on() // turns on stackhelp
 
-stackhelp().on() // turns on stackhelp
+stackhelp.toggle() // if on, turn off and vice versa
 
-stackhelp().toggle() // if on, turn off and vice versa
+stackhelp.getStatus() // ==> 'on' or 'off'
 
-stackhelp().getStatus() // ==> 'on' or 'off'
-
-stackhelp().setTags('NodeJs', 'npm') //will add stackoverflow tags to your querie
+stackhelp.setTags([
+  'NodeJs', 
+  'npm'
+ ]) //will add stackoverflow tags to your querie
 
 // this is it
 ```
+## Test
+Run `npm install --only=dev`  
+
+Then `npm test`
