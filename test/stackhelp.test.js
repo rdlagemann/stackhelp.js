@@ -4,7 +4,7 @@ const { queryFormatter } = require('./../src/helper.js')
 const testErr = new TypeError('null has no properties')
 
 // partial
-const finalQuery = query => queryFormatter('http://www.stackoverflow.com/search?q=', query)
+const finalQuery = query => queryFormatter(stackhelp.url, query)
 
 describe('Controller test', () => {  
 

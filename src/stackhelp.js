@@ -59,5 +59,6 @@ module.exports = {
   toggle,
   getStatus,
   setTags,
+  url,
   find
 }
