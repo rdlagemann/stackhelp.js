@@ -55,7 +55,6 @@ describe('Running commands with queries' , () => {
 
   test('Query validation with tags', () => {   
     searchString = testErr.toString() + ' ' + stackhelp.setTags(['NodeJS', 'npm']).join(' ')
-    console.log(typeof searchString)
     expect(stackhelp.find(testErr)).toBe(finalQuery(searchString))    
   })
 })
