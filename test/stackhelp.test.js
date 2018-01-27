@@ -1,8 +1,10 @@
 const stackhelp = require('./../src/stackhelp.js')
 const { queryFormatter } = require('./../src/helper.js')
 
-const url = 'http://www.stackoverflow.com/search?q='
 const testErr = new TypeError('null has no properties')
+
+// partial
+const finalQuery = query => queryFormatter('http://www.stackoverflow.com/search?q=', query)
 
 describe('Controller test', () => {  
 
@@ -39,17 +41,21 @@ describe('Controller test', () => {
   
 })
 
-describe('Running commands with queries' , () => {
-  let searchString
-  test('Query validation', () => {
+describe('Running commands with queries' , () => { 
+  beforeEach(() => {
     stackhelp.on()
+  })
+
+  let searchString = ''
+
+  test('Query validation', () => {
     searchString = testErr.toString()
-    expect(stackhelp.find(testErr)).toBe(queryFormatter(url, searchString))    
+    expect(stackhelp.find(testErr)).toBe(finalQuery(searchString))    
   })
 
   test('Query validation with tags', () => {   
-    stackhelp.on() 
     searchString = testErr.toString() + ' ' + stackhelp.setTags(['NodeJS', 'npm']).join(' ')
-    expect(stackhelp.find(testErr)).toBe(queryFormatter(url, searchString))    
+    console.log(typeof searchString)
+    expect(stackhelp.find(testErr)).toBe(finalQuery(searchString))    
   })
 })
