@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/rdlagemann/stackhelp.js.svg?branch=master)](https://travis-ci.org/rdlagemann/stackhelp.js)
 # stackhelp.js
 Hardcore StackOverflow debugging. :see_no_evil:
 
@@ -37,6 +38,8 @@ stackhelp.on() // turns on stackhelp
 stackhelp.toggle() // if on, turn off and vice versa
 
 stackhelp.getStatus() // ==> 'on' or 'off'
+
+stackhelp.url // ==> http://www.stackoverflow.com/search?q=
 
 stackhelp.setTags([
   'NodeJs', 

@@ -27,7 +27,7 @@ const setTags = (arr) => {
   if(!arr || arr.length === 0) {
     tags = []
   } else {
-    [].forEach.call(arr, e => {
+    ;[].forEach.call(arr, e => {
       if(typeof e !== 'string'){
         throw new TypeError('Tags must be strings')
       }
