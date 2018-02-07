@@ -2,11 +2,10 @@ const stackhelp = require('./src/stackhelp')
 
 console.log(stackhelp)
 
-function promiseFail() {
-  return new Promise( (resolve, reject) => {
+function promiseFail () {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       reject('Promise will always fail')
-      
     }, 500)
   })
 }

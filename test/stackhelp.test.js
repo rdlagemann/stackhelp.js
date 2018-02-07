@@ -6,20 +6,19 @@ const testErr = new TypeError('null has no properties')
 // partial
 const finalQuery = query => queryFormatter(stackhelp.url, query)
 
-describe('Controller test', () => {  
-
+describe('Controller test', () => {
   test('stackhelp is defined and is object', () => {
     expect(typeof stackhelp).toBe('object')
   })
 
   test('stackhelp OFF, status off', () => {
-    stackhelp.off()  
+    stackhelp.off()
     expect(stackhelp.getStatus()).toBe('off')
   })
 
   test('stackhelp ON, status on', () => {
     stackhelp.on()
-    expect(stackhelp.getStatus()).toBe('on')      
+    expect(stackhelp.getStatus()).toBe('on')
   })
 
   test('stackhelp TOGGLE, status off', () => {
@@ -36,12 +35,11 @@ describe('Controller test', () => {
   })
 
   test('No tags, back to length === 0', () => {
-    expect(stackhelp.setTags().length).toBe(0)      
+    expect(stackhelp.setTags().length).toBe(0)
   })
-  
 })
 
-describe('Running commands with queries' , () => { 
+describe('Running commands with queries', () => {
   beforeEach(() => {
     stackhelp.on()
   })
@@ -50,11 +48,11 @@ describe('Running commands with queries' , () => {
 
   test('Query validation', () => {
     searchString = testErr.toString()
-    expect(stackhelp.find(testErr)).toBe(finalQuery(searchString))    
+    expect(stackhelp.find(testErr)).toBe(finalQuery(searchString))
   })
 
-  test('Query validation with tags', () => {   
+  test('Query validation with tags', () => {
     searchString = testErr.toString() + ' ' + stackhelp.setTags(['NodeJS', 'npm']).join(' ')
-    expect(stackhelp.find(testErr)).toBe(finalQuery(searchString))    
+    expect(stackhelp.find(testErr)).toBe(finalQuery(searchString))
   })
 })
